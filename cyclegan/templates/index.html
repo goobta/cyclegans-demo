@@ -4,6 +4,8 @@
 <head>
   <meta charset="utf-8">
   <title>Van Gogh-ify It!</title>
+
+  <script src="{{ url_for('static', filename='js/camera.js') }}"></script>
 </head>
 
 <body>
@@ -69,6 +71,31 @@
       it out, CycleGANs are a super cool technique and they've got some
       interesting applications, such as converting Fortnite gameplay to
       PUBG!</p>
+    </section>
+
+    <section>
+      <h1>Putting it all together (and a demo!)</h1>
+
+      <p>Another area where CycleGANs have shown remarkable results are
+      converting real-world photos into different art styles. One of the artists
+      that this has worked for is (you guess it!) Vincent van Gogh. This demo
+      uses the <a 
+      href='https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix'>trained
+      model</a> from the original paper.</p>
+
+      <p>You can either use your webcam to take a photo or upload an image to
+      the viewfinder below. Then, hit convert and see how the model tries to
+      make it look like van Gogh painted your image!</p>
+
+      <div class='camera'>
+        <video id='video'>Video stream not available</video>
+        <button id='startButton'>Take photo</button>
+      </div>
+
+      <canvas id='canvas'></canvas>
+      <div class='output'>
+        <img id="photo" alt="the screen capture will appear in this box">
+      </div>
     </section>
   </main>
 </body>
