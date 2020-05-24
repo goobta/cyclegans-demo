@@ -9,7 +9,7 @@
 <body>
   <header>
     <h1>Van Gogh-ify It!</h1>
-    <h2>Performing Style Transfers with Cyclegan Image-To-Image Translations</h2>
+    <h2>Performing Style Transfers with CycleGANs Image-To-Image Translations</h2>
   </header>
   
   <main>
@@ -42,6 +42,33 @@
         <figcaption><span class='artname'>Starry Night</span> 
         (1889)</figcaption>
       </figure>
+    </section>
+
+    <section>
+      <h1>CycleGANs</h1>
+
+      <p>CycleGANs aims to solve image-to-image translation, a type of computer
+      vision problem where the idea is to convert one image to another "style",
+      while trying to maintain as much of the image context as possible. An
+      example would be converting images of landscapes during summer to look
+      like the winter and vice-a-versa:</p>
+
+      <figure>
+        <img src="{{ url_for('static', filename='res/season_transfer.png')}}" 
+          alt="Season style transfer"/>
+
+        <figcaption>An example of image-to-image translation, where a picture 
+          of Yosemite during the summer was automatically converted into one
+          during the winter and vice-a-versa.</figcaption>
+      </figure>
+
+      <p>The figure above was actually taken from the <a
+      href='https://arxiv.org/pdf/1703.10593.pdf'>CycleGAN paper by Zhu et
+      al.</a>. Their <a href='https://junyanz.github.io/CycleGAN/'>project
+      site</a> offers more details and examples on their work. Definitely check
+      it out, CycleGANs are a super cool technique and they've got some
+      interesting applications, such as converting Fortnite gameplay to
+      PUBG!</p>
     </section>
   </main>
 </body>
