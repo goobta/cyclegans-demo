@@ -24,6 +24,7 @@ function init() {
   cameraButton.addEventListener('click', handleCamera, false);
 
   uploadButton = document.getElementById('uploadButton');
+  uploadButton.addEventListener('change', handleUpload, false);
 }
 
 function activate_webcam() {
@@ -59,10 +60,6 @@ function drawToCanvas(img, width, height) {
   var yOffset = (scaledHeight - sidelen) / 2
 
   context.drawImage(img, -xOffset, -yOffset, scaledWidth, scaledHeight);
-}
-
-function takePhoto() {
-  drawToCanvas(video, video.videoWidth, video.videoHeight);
 
   video.style.display = 'none';
   canvas.style.display = 'initial';
@@ -72,7 +69,7 @@ function takePhoto() {
 
 function handleCamera() {
   if(streaming) {
-    takePhoto();
+    drawToCanvas(video, video.videoWidth, video.videoHeight);
     cameraButton.textContent = 'Take Another';
   } else {
     activate_webcam();
@@ -80,17 +77,18 @@ function handleCamera() {
   }
 }
 
-// function handleUpload(event) {
-//   var reader = new FileReader();
+function handleUpload(event) {
+  var reader = new FileReader();
 
-//   reader.onload = function(event) {
-//     var img = new Image();
+  reader.onload = function(event) {
+    var img = new Image();
 
-//     img.onload = function() {
-//       var context = canvas.getContext('2d')
-//     }
-//   }
-// }
+    img.onload = () => drawToCanvas(img, img.width, img.height);
+    img.src = event.target.result;
+  }
+
+  reader.readAsDataURL(event.target.files[0]);
+}
 
 // Initialize script on window load
 window.addEventListener('load', init, false);

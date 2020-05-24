@@ -89,15 +89,20 @@
       the viewfinder below. Then, hit convert and see how the model tries to
       make it look like van Gogh painted your image!</p>
 
-      <div class="input">
-        <div class='viewfinder'>
-          <canvas id='canvas'></canvas>
-          <video id='video'>Video stream not available</video>
+      <div id='demo'>
+        <div class="input">
+          <div class='viewfinder'>
+            <canvas id='canvas'></canvas>
+            <video id='video'>Video stream not available</video>
+          </div>
+
+          <button id='cameraButton'>Use camera</button>
+          or
+          <input type='file' id='uploadButton' accept="image/*">
         </div>
 
-        <button id='cameraButton'>Use camera</button>
-        or
-        <input type='file' id='uploadButton' accept="image/*">
+        <button id='convert'>van Gogh-ify!</button>
+
       </div>
     </section>
   </main>
