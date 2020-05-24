@@ -18,10 +18,9 @@ function init() {
   canvas.style.display = 'none';
 
   photo = document.getElementById('photo');
-
   cameraButton = document.getElementById('cameraButton');
 
-  cameraButton.addEventListener('click', activate_webcam, false);
+  cameraButton.addEventListener('click', handleCamera, false);
 }
 
 function activate_webcam() {
@@ -35,7 +34,10 @@ function activate_webcam() {
     .catch(err => console.log('Error playing video: ' + err));
 
   video.addEventListener('canplay', function(event) {
-    streaming = true;;
+    video.style.display = 'initial';
+    canvas.style.display = 'none';
+
+    streaming = true;
   }, false);
 }
 
@@ -60,6 +62,18 @@ function takePhoto() {
 
   video.style.display = 'none';
   canvas.style.display = 'initial';
+
+  streaming = false;
+}
+
+function handleCamera() {
+  if(streaming) {
+    takePhoto();
+    cameraButton.textContent = 'Take Another';
+  } else {
+    activate_webcam();
+    cameraButton.textContent = 'Take Photo';
+  }
 }
 
 // Initialize script on window load
