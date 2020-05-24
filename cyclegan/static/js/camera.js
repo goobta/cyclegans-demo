@@ -6,6 +6,7 @@ var canvas = undefined;
 var photo = undefined;
 var cameraButton = undefined;
 var uploadButton = undefined;
+var convertButton = undefined;
 
 var sidelen = undefined;
 
@@ -25,6 +26,9 @@ function init() {
 
   uploadButton = document.getElementById('uploadButton');
   uploadButton.addEventListener('change', handleUpload, false);
+
+  convertButton = document.getElementById('convert');
+  convertButton.addEventListener('click', convert, false);
 }
 
 function activate_webcam() {
@@ -88,6 +92,20 @@ function handleUpload(event) {
   }
 
   reader.readAsDataURL(event.target.files[0]);
+}
+
+function convert() {
+  if(canvas.style.display == 'none') {
+    alert('Please choose an image to convert!');
+    console.error('No image to convert!');
+    return;
+  }
+
+  var imgData = canvas.toDataURL();
+  fetch('/vangoghconvert', {
+    method: 'POST',
+    body: imgData
+  })
 }
 
 // Initialize script on window load
