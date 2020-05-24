@@ -5,6 +5,7 @@ var video = undefined;
 var canvas = undefined;
 var photo = undefined;
 var cameraButton = undefined;
+var uploadButton = undefined;
 
 var sidelen = undefined;
 
@@ -15,12 +16,14 @@ function init() {
   sidelen = Math.max(video.clientWidth, video.clientHeight);
 
   canvas = document.getElementById('canvas');
+  canvas.width = sidelen;
+  canvas.height = sidelen;
   canvas.style.display = 'none';
 
-  photo = document.getElementById('photo');
   cameraButton = document.getElementById('cameraButton');
-
   cameraButton.addEventListener('click', handleCamera, false);
+
+  uploadButton = document.getElementById('uploadButton');
 }
 
 function activate_webcam() {
@@ -41,24 +44,25 @@ function activate_webcam() {
   }, false);
 }
 
-function takePhoto() {
+function drawToCanvas(img, width, height) {
   var context = canvas.getContext('2d');
 
-  canvas.width = sidelen;
-  canvas.height = sidelen;
-
-  if(video.videoWidth > video.videoHeight) {
-    var scaleFactor = video.videoHeight / sidelen;
+  if(width > height) {
+    var scaleFactor = height / sidelen;
   } else {
-    var scaleFactor = video.videoWidth / sidelen;
+    var scaleFactor = width / sidelen;
   }
 
-  var scaledWidth = video.videoWidth / scaleFactor;
-  var scaledHeight = video.videoHeight / scaleFactor;
+  var scaledWidth = width / scaleFactor;
+  var scaledHeight = height / scaleFactor;
   var xOffset = (scaledWidth - sidelen) / 2
   var yOffset = (scaledHeight - sidelen) / 2
 
-  context.drawImage(video, -xOffset, -yOffset, scaledWidth, scaledHeight);
+  context.drawImage(img, -xOffset, -yOffset, scaledWidth, scaledHeight);
+}
+
+function takePhoto() {
+  drawToCanvas(video, video.videoWidth, video.videoHeight);
 
   video.style.display = 'none';
   canvas.style.display = 'initial';
@@ -75,6 +79,18 @@ function handleCamera() {
     cameraButton.textContent = 'Take Photo';
   }
 }
+
+// function handleUpload(event) {
+//   var reader = new FileReader();
+
+//   reader.onload = function(event) {
+//     var img = new Image();
+
+//     img.onload = function() {
+//       var context = canvas.getContext('2d')
+//     }
+//   }
+// }
 
 // Initialize script on window load
 window.addEventListener('load', init, false);
