@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Van Gogh-ify It!</title>
+</head>
+
+<body>
+  <header>
+    <h1>Van Gogh-ify It!</h1>
+    <h2>Performing Style Transfers with Cyclegan Image-To-Image Translations</h2>
+  </header>
+  
+  <main>
+    <section>
+      <p>As per <a href='https://en.wikipedia.org/wiki/Vincent_van_Gogh'>
+      Wikipedia</a>, Vincent van Gogh was a Dutch post-impressionist painter who
+      is among the most famous and influential figures in the history of Western
+      art. Van Gogh has created more than 2,000 artworks between his paintings,
+      drawings, and sketches.</p>
+
+      <p>Van Gogh had several artistic style periods as well as suffered from
+      psychotic episodes. He is infamous for being the post-impressionist
+      painter who cut his ear off. However, his influence on the artistic world
+      cannot be understated. His works are some of the most recognizable out
+      there, such as:</p>
+        
+      <figure>
+        <img src="{{ url_for('static', filename='res/self_portrait.webp')}}" 
+          alt="Self Portrait with Bandaged Ear"/>
+
+        <figcaption><span class='artname'>Self-portrait with Bandaged Ear, Easel
+        and Japanese Print</span> 
+        (1889)</figcaption>
+      </figure>
+
+      <figure>
+        <img src="{{ url_for('static', filename='res/starry_night.jpg')}}" 
+          alt="Starry Night"/>
+
+        <figcaption><span class='artname'>Starry Night</span> 
+        (1889)</figcaption>
+      </figure>
+    </section>
+  </main>
+</body>
+</html>
