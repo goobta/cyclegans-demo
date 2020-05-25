@@ -1,8 +1,6 @@
 from .test_model import TestModel
 from . import data
 
-import matplotlib.pyplot as plt
-
 import PIL.Image
 import argparse
 import math
@@ -52,7 +50,7 @@ default_opts = {
 
 def vangogh_model():
   opts = default_opts.copy()
-  opts['checkpoints_dir'] = 'bin/'
+  opts['checkpoints_dir'] = 'bin/models/vangogh/'
   opt = argparse.Namespace(**opts)
   model = TestModel(opt)
   model.setup(opt)
