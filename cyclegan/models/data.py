@@ -1,3 +1,5 @@
+# Based on https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/blob/master/data/base_dataset.py
+
 import random
 import numpy as np
 import torch.utils.data as data

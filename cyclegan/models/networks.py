@@ -1,3 +1,5 @@
+# Based on https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/blob/master/models/networks.py
+
 import torch
 import torch.nn as nn
 from torch.nn import init

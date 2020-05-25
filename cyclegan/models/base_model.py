@@ -1,3 +1,5 @@
+# Based on https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/blob/master/models/base_model.py
+
 import os
 import torch
 from collections import OrderedDict
