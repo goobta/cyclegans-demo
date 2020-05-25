@@ -1,5 +1,9 @@
 from .test_model import TestModel
+from . import data
 
+import matplotlib.pyplot as plt
+
+import PIL.Image
 import argparse
 import math
 
@@ -25,12 +29,12 @@ default_opts = {
   'serial_batches': True,
   'num_threads': 0,
   'batch_size': 1,
-  'load_size': 256,
-  'crop_size': 256,
+  'load_size': 128,
+  'crop_size': 128,
   'max_dataset_size': math.inf,
   'preprocess': 'resize_and_crop',
   'no_flip': True,
-  'display_winsize': 256,
+  'display_winsize': 128,
   'epoch': 'latest',
   'load_iter': 0,
   'verbose': False,
@@ -54,4 +58,24 @@ def vangogh_model():
   model.setup(opt)
   return model
 
+def _get_transforms():
+  opt = argparse.Namespace(**default_opts)
+  return data.get_transform(opt, grayscale=False)
+
+
 VANGOGH=vangogh_model()
+_TRANFORM = _get_transforms()
+
+
+def predict(img: PIL.Image, model):
+  clean_img = _TRANFORM(img.convert('RGB'))
+  batched = clean_img.unsqueeze(0)
+  inpt = {'A': batched, 'A_paths': None}
+
+  model.set_input(inpt)
+  model.test()
+  vis = model.get_current_visuals()
+
+  fake = vis['fake'].squeeze().permute(1, 2, 0)
+  plt.imshow(fake)
+  plt.show()

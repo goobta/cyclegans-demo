@@ -8,7 +8,6 @@ from cyclegan import app
 from cyclegan import utils
 from cyclegan import models
 
-
 @app.route('/')
 @app.route('/index')
 def index():
@@ -16,9 +15,5 @@ def index():
 
 @app.route('/vangoghconvert', methods=['POST'])
 def vangoghconvert():
-  img = utils.requestb64_to_image(str(request.data)).convert('RGB')
-  img_numpy = np.array(img)[np.newaxis, :]
-  img_torch = torch.from_numpy(img_numpy)
-  img_final = img_torch.permute([0, 3, 1, 2])
-  batch = {'A': img_final, 'A_paths': None}
-  return 'test'
+  img = utils.requestb64_to_image(str(request.data))
+  return models.predict(img, models.VANGOGH)
