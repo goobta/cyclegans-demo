@@ -3,6 +3,7 @@ var streaming = false;
 
 var video = undefined;
 var canvas = undefined;
+var output = undefined;
 var photo = undefined;
 var cameraButton = undefined;
 var uploadButton = undefined;
@@ -29,6 +30,10 @@ function init() {
 
   convertButton = document.getElementById('convert');
   convertButton.addEventListener('click', convert, false);
+
+  output = document.getElementById('output_canvas');
+  output.width = sidelen;
+  output.height = sidelen;
 }
 
 function activate_webcam() {
@@ -106,6 +111,14 @@ function convert() {
     method: 'POST',
     body: imgData
   })
+  .then(response => response.text())
+  .then(function(b64img) {
+    let context = output.getContext('2d');
+    
+    let img = new Image();
+    img.onload = () => context.drawImage(img, 0, 0);
+    img.src = b64img;
+  });
 }
 
 // Initialize script on window load

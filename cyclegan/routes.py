@@ -1,6 +1,8 @@
 from flask import request, render_template
 import flask
 
+import base64
+
 import numpy as np
 import torch
 
@@ -16,4 +18,5 @@ def index():
 @app.route('/vangoghconvert', methods=['POST'])
 def vangoghconvert():
   img = utils.requestb64_to_image(str(request.data))
-  return models.predict(img, models.VANGOGH)
+  fake = models.predict(img, models.VANGOGH)
+  return 'data:image/png;base64,' + utils.numpy_img2b64(fake)

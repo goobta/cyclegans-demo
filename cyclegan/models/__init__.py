@@ -77,5 +77,4 @@ def predict(img: PIL.Image, model):
   vis = model.get_current_visuals()
 
   fake = vis['fake'].squeeze().permute(1, 2, 0)
-  plt.imshow(fake)
-  plt.show()
+  return fake.numpy()
