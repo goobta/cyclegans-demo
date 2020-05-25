@@ -50,11 +50,21 @@ default_opts = {
 
 
 def _get_transforms():
+  """Get a function to preprocess the images
+
+  Returns:
+    torch.Compose: preprocessing pipeline based on default_args
+  """
   opt = argparse.Namespace(**default_opts)
   return data.get_transform(opt, grayscale=False)
 
 
 def vangogh_model():
+  """Create the vangogh generator
+
+  Returns:
+    base_model.BaseModel: vangogh model
+  """
   opts = default_opts.copy()
   opts['checkpoints_dir'] = 'bin/models/vangogh/'
   opt = argparse.Namespace(**opts)
@@ -69,6 +79,15 @@ _TRANFORM = _get_transforms()
 
 
 def predict(img: PIL.Image, model):
+  """Perform style transfer on image with the desired model.
+
+  Args:
+    img (PIL.Image): real image
+    model (base_model.BaseModel): model to use
+
+  Returns:
+    np.ndarray: fake image in the shape of (width, height, channels)
+  """
   # Preprocess image
   clean_img = _TRANFORM(img.convert('RGB'))
 
