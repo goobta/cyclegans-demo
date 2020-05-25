@@ -2,6 +2,7 @@
 from .test_model import TestModel
 from . import data
 
+from cyclegan import utils
 import PIL.Image
 import argparse
 import math
@@ -48,6 +49,8 @@ default_opts = {
   'display_id': -1
 }
 
+vangogh_url = 'http://localhost:8000/latest_net_G.pth'
+
 
 def _get_transforms():
   """Get a function to preprocess the images
@@ -65,6 +68,8 @@ def vangogh_model():
   Returns:
     base_model.BaseModel: vangogh model
   """
+  utils.assert_downloaded('vangogh', vangogh_url)
+
   opts = default_opts.copy()
   opts['checkpoints_dir'] = 'bin/models/vangogh/'
   opt = argparse.Namespace(**opts)

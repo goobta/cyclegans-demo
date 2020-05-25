@@ -1,7 +1,9 @@
+import urllib.request
 import numpy as np
-import base64
 import PIL.Image
+import base64
 import io
+import os
 
 
 def requestb64_to_image(req: str) -> PIL.Image:
@@ -36,3 +38,14 @@ def numpy_img2b64req(img: np.ndarray) -> str:
   pil_img.save(buffer, format='PNG')
   return 'data:image/png;base64,' + \
          base64.b64encode(buffer.getvalue()).decode('utf-8')
+
+
+def assert_downloaded(name: str, url:str, fn: str = 'latest_net_G.pth') -> bool:
+  if os.path.isfile('bin/models/{}/{}'.format(name, fn)):
+    return True
+  
+  os.makedirs('bin/models/{}'.format(name), exist_ok=True)
+
+  print('downloading {} model'.format(name))
+  urllib.request.urlretrieve(url, 'bin/models/{}/{}'.format(name, fn))
+  return True
