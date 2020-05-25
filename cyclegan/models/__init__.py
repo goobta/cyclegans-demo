@@ -1,3 +1,4 @@
+# A HUGE hack to get the cyclegan model working
 from .test_model import TestModel
 from . import data
 
@@ -27,12 +28,12 @@ default_opts = {
   'serial_batches': True,
   'num_threads': 0,
   'batch_size': 1,
-  'load_size': 256,
-  'crop_size': 256,
+  'load_size': 256,                     # Modify this value to change resolution
+  'crop_size': 256,                     # Modify this value to change resolution
   'max_dataset_size': math.inf,
   'preprocess': 'resize_and_crop',
   'no_flip': True,
-  'display_winsize': 256,
+  'display_winsize': 256,               # Modify this value to change resolution
   'epoch': 'latest',
   'load_iter': 0,
   'verbose': False,
@@ -48,17 +49,19 @@ default_opts = {
 }
 
 
+def _get_transforms():
+  opt = argparse.Namespace(**default_opts)
+  return data.get_transform(opt, grayscale=False)
+
+
 def vangogh_model():
   opts = default_opts.copy()
   opts['checkpoints_dir'] = 'bin/models/vangogh/'
   opt = argparse.Namespace(**opts)
+
   model = TestModel(opt)
   model.setup(opt)
   return model
-
-def _get_transforms():
-  opt = argparse.Namespace(**default_opts)
-  return data.get_transform(opt, grayscale=False)
 
 
 VANGOGH=vangogh_model()
@@ -66,13 +69,21 @@ _TRANFORM = _get_transforms()
 
 
 def predict(img: PIL.Image, model):
+  # Preprocess image
   clean_img = _TRANFORM(img.convert('RGB'))
+
+  # Put into the (batch_count, width, height, channels)
   batched = clean_img.unsqueeze(0)
+
+  # Put into the batch format that the default model uses. Put in dummy 
+  # placeholders for actual file paths as everything is done in cache.
   inpt = {'A': batched, 'A_paths': None}
 
+  # Generate predictions
   model.set_input(inpt)
   model.test()
   vis = model.get_current_visuals()
 
+  # Get the results and reshape to (width, height, channels)
   fake = vis['fake'].squeeze().permute(1, 2, 0)
   return fake.numpy()
