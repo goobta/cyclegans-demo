@@ -30,22 +30,24 @@
       cannot be understated. His works are some of the most recognizable out
       there, such as:</p>
         
-      <figure>
-        <img src="{{ url_for('static', filename='res/self_portrait.webp')}}" 
-          alt="Self Portrait with Bandaged Ear"/>
+      <div class="row">
+        <figure class="column">
+          <img src="{{ url_for('static', filename='res/self_portrait.webp')}}" 
+            alt="Self Portrait with Bandaged Ear"/>
 
-        <figcaption><span class='artname'>Self-portrait with Bandaged Ear, Easel
-        and Japanese Print</span> 
-        (1889)</figcaption>
-      </figure>
+          <figcaption><span class='artname'>Self-portrait with Bandaged Ear, Easel
+          and Japanese Print</span> 
+          (1889)</figcaption>
+        </figure>
 
-      <figure>
-        <img src="{{ url_for('static', filename='res/starry_night.jpg')}}" 
-          alt="Starry Night"/>
+        <figure class="column">
+          <img src="{{ url_for('static', filename='res/starry_night.jpg')}}" 
+            alt="Starry Night"/>
 
-        <figcaption><span class='artname'>Starry Night</span> 
-        (1889)</figcaption>
-      </figure>
+          <figcaption><span class='artname'>Starry Night</span> 
+          (1889)</figcaption>
+        </figure>
+      </div>
     </section>
 
     <section>
@@ -57,14 +59,16 @@
       example would be converting images of landscapes during summer to look
       like the winter and vice-a-versa:</p>
 
-      <figure>
-        <img src="{{ url_for('static', filename='res/season_transfer.png')}}" 
-          alt="Season style transfer"/>
+      <div class="row">
+        <figure class="column">
+          <img src="{{ url_for('static', filename='res/season_transfer.png')}}" 
+            alt="Season style transfer"/>
 
-        <figcaption>An example of image-to-image translation, where a picture 
-          of Yosemite during the summer was automatically converted into one
-          during the winter and vice-a-versa.</figcaption>
-      </figure>
+          <figcaption>An example of image-to-image translation, where a picture 
+            of Yosemite during the summer was automatically converted into one
+            during the winter and vice-a-versa.</figcaption>
+        </figure>
+      </div>
 
       <p>The figure above was actually taken from the <a
       href='https://arxiv.org/pdf/1703.10593.pdf'>CycleGAN paper by Zhu et
@@ -89,25 +93,41 @@
       the viewfinder below. Then, hit convert and see how the model tries to
       make it look like van Gogh painted your image!</p>
 
-      <div id='demo'>
-        <div class="input">
+      <div id='demo' class="row">
+        <div class="demo_view">
           <div class='viewfinder'>
             <canvas id='canvas'></canvas>
             <video id='video'>Video stream not available</video>
           </div>
 
-          <button id='cameraButton'>Use camera</button>
-          or
+          <button id='cameraButton'>Use camera</button> 
+          <br/>
+          or 
+          <br/>
           <input type='file' id='uploadButton' accept="image/*">
         </div>
 
-        <button id='convert'>van Gogh-ify!</button>
+        <div class='demo_convert'>
+          <img src="{{ url_for('static', filename='res/long-right-arrow.png')}}" 
+            alt="Convert!"/>
+          <br/>
+          <br/>
+          <button id='convert'>van Gogh-ify!</button>
+        </div>
 
-        <div class="output">
+        <div class="demo_view">
           <canvas id='output_canvas'></canvas>
         </div>
       </div>
     </section>
   </main>
+
+  <footer>
+    <span>&copy; 2020</span>
+    <a href='https://wpi.edu/' target='_blank'>
+      <img src="{{ url_for('static', filename='res/wpi_logo.png')}}"
+        height=25px/></a>
+    <a href='http://users.wpi.edu/~yli15/team.html'>Our Team</a>
+  </footer>
 </body>
 </html>

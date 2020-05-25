@@ -4,3 +4,99 @@
   width: 256px;
   height: 256px;
 }
+
+body {
+  margin: 2em auto;
+  padding: 0 2em;
+  max-width: 1000px;
+  min-width: 800px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: larger;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.column {
+  flex: 50%;
+}
+
+figure {
+  max-width: 350px;
+  text-align: center;
+}
+
+figure img {
+  width: 100%;
+}
+
+figcaption {
+  font-size: small;
+  color: #595959;
+}
+
+.artname {
+  font-style: italic;
+}
+
+#demo {
+  align-items: flex-start;
+}
+
+.demo_view {
+  flex: 40%;
+  text-align: center;
+}
+
+.demo_convert {
+  flex: 20%;
+  height: 256px;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.demo_convert img {
+  width: 80%;
+  margin-bottom: -25px;
+}
+
+
+video, canvas {
+  border: 1px solid #595959;
+  box-shadow: 2px 2px 3px black;
+}
+
+#convert {
+  border: 0;
+  box-shadow: none;
+  border-radius: 5px;
+  padding: 10px;
+  background: none;
+  background-color: #AC2B37;
+
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: larger;
+  color: white;
+}
+
+footer {
+  margin-top: 20px;
+  padding-top: 5px;
+
+  clear: both;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border:1px solid #595959;
+  border-width: 1px 0 0 0;
+
+  font-size: small;
+}
