@@ -1,4 +1,5 @@
 bin/models/
+/supervisord.*
 
 venv-*/
 *.swp
