@@ -49,7 +49,7 @@ default_opts = {
   'display_id': -1
 }
 
-vangogh_url = 'http://localhost:8000/latest_net_G.pth'
+vangogh_url = 'https://users.wpi.edu/~agupta4/vangogh.pth'
 
 
 def _get_transforms():
